@@ -1,0 +1,20 @@
+import os
+
+
+from pytapo import Tapo
+from dotenv import load_dotenv
+
+
+# Замените эти данные вашими учетными данными и IP-адресом камеры
+load_dotenv()
+user = os.getenv('user')
+password = os.getenv('password')
+host = os.getenv('host')
+
+# Создание экземпляра камеры
+tapo = Tapo(host, user, password)
+
+# Получение URL для изображения
+print(tapo.getBasicInfo())
+
+# Загрузка и сохранение изображения

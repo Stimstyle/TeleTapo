@@ -1,12 +1,11 @@
 import asyncio
 import logging
+import os
 
 from aiogram import Bot
 from aiogram import Dispatcher
 from aiogram import types
 from dotenv import load_dotenv
-import os
-
 
 load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -15,20 +14,17 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-
+@dp.message()
+async def echo_message(message: types.Message):
+    await message.answer(text=message.text)
+    
+    
 async def main():
     logging.basicConfig(level=logging.INFO)
     await dp.start_polling(bot)
     
 
-@dp.message_handler(commands=['get_video'])
-async def get_video(message: types.Message):
-    # Код для взаимодействия с TP Link/Tapo API
-    # Получение изображения или видео с камеры
-    video = ... # Здесь должен быть ваш код для получения видео
 
-    # Отправка видео пользователю
-    await message.reply_video(video)
 
 
 
